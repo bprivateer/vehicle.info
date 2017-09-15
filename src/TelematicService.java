@@ -33,25 +33,30 @@ public class TelematicService {
 
     public void html(){
         try {
+            String htmlVehicleInfo = "";
+            VehicleInfo averages = new VehicleInfo();
+            int dividend = 0;
+
             ObjectMapper mapper = new ObjectMapper();
             File file = new File(".");
             for (File f : file.listFiles()) {
                 if (f.getName().endsWith(".json")) {
+                    dividend++;
+                    VehicleInfo vehicleInfo = mapper.readValue(f, VehicleInfo.class);
 
-                    file.write =
-                            " \"<tr>\\n\" +\n" +
-                            " \"<td align=\\\"center\\\">\" + /* vehicleInfo.getVIN() + */ \"</td><td align=\\\"center\\\">\"+ " +
-                            "/* vehicleInfo.getConsumption() + */ \"</td><td align=\\\"center\\\">\"+ /* vehicleInfo.getOdomReader() + */ " +
-                            "\"</td><td align=\\\"center\\\">\"+ /* vehicleInfo.getOdmeter() + */ \"</td align=\\\"center\\\"><td align=\\\"center" +
-                            "\\\">\"+ /* vehicleInfo.getLiters() + */\"</td>\\n\" +\n" +
-                            " \" </tr>\\n\" +\n"
+                    averages.setOdmeter(averages.getOdmeter() + vehicleInfo.getOdmeter());
+
+                    htmlVehicleInfo +=
+                            "        <tr>\n" +
+                            "            <td align=\"center\">" +  vehicleInfo.getVIN() + "</td><td align=\"center\">"+ vehicleInfo.getConsumption() + "</td><td align=\"center\">"+ vehicleInfo.getOdomReader() + "</td><td align=\"center\">"+ vehicleInfo.getOdmeter() + "</td align=\"center\"><td align=\"center\">"+ vehicleInfo.getLiters() + "</td>\n" +
+                            "        </tr>\n";
 
                     // Now you have a File object named "f".
                     // You can use this to create a new instance of Scanner
-                    VehicleInfo vi = mapper.readValue(f, VehicleInfo.class);
-                    System.out.println(vi.getVIN());
                 }
             }
+
+            averages.setOdmeter(averages.getOdmeter() / dividend);
 
             // int avg[] = { vehilc.getOdom, ,3,4,5}
 
@@ -61,13 +66,13 @@ public class TelematicService {
             String htmlContent = "<html>\n" +
                     "  <title>Vehicle Telematics Dashboard</title>\n" +
                     "  <body>\n" +
-                    "    <h1 align=\"center\">Averages for # vehicles</h1>\n" +
+                    "    <h1 align=\"center\">Averages for " + dividend + " vehicles</h1>\n" +
                     "    <table align=\"center\">\n" +
                     "        <tr>\n" +
                     "            <th>Odometer (miles) |</th><th>Consumption (gallons) |</th><th>Last Oil Change |</th><th>Engine Size (liters)</th>\n" +
                     "        </tr>\n" +
                     "        <tr>\n" +
-                    "            <td align=\"center\">#</td><td align=\"center\">#</td><td align=\"center\">#</td align=\"center\"><td align=\"center\">#</td>\n" +
+                    "            <td align=\"center\">" + averages.getOdmeter() + "</td><td align=\"center\">#</td><td align=\"center\">#</td align=\"center\"><td align=\"center\">#</td>\n" +
                     "        </tr>\n" +
                     "    </table>\n" +
                     "    <h1 align=\"center\">History</h1>\n" +
@@ -75,9 +80,7 @@ public class TelematicService {
                     "        <tr>\n" +
                     "            <th>VIN</th><th>Odometer (miles)</th><th>Consumption (gallons)</th><th>Last Oil Change</th><th>Engine Size (liters)</th>\n" +
                     "        </tr>\n" +
-                    "        <tr>\n" +
-                    "            <td align=\"center\">" + /* vehicleInfo.getVIN() + */ "</td><td align=\"center\">"+ /* vehicleInfo.getConsumption() + */ "</td><td align=\"center\">"+ /* vehicleInfo.getOdomReader() + */ "</td><td align=\"center\">"+ /* vehicleInfo.getOdmeter() + */ "</td align=\"center\"><td align=\"center\">"+ /* vehicleInfo.getLiters() + */"</td>\n" +
-                    "        </tr>\n" +
+                    htmlVehicleInfo +
                     "        <tr>\n" +
                     "            <td align=\"center\">45435</td><td align=\"center\">123</td><td align=\"center\">234</td><td align=\"center\">345</td align=\"center\"><td align=\"center\">4.5</td>\n" +
                     "        </tr>\n" +
@@ -96,6 +99,7 @@ public class TelematicService {
     }
 
 }
+
 
 
 
