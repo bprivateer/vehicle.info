@@ -45,6 +45,9 @@ public class TelematicService {
                     VehicleInfo vehicleInfo = mapper.readValue(f, VehicleInfo.class);
 
                     averages.setOdmeter(averages.getOdmeter() + vehicleInfo.getOdmeter());
+                    averages.setConsumption(averages.getConsumption() + vehicleInfo.getConsumption());
+                    averages.setOdomReader(averages.getOdomReader() + vehicleInfo.getOdomReader());
+                    averages.setLiters(averages.getLiters() + vehicleInfo.getLiters());
 
                     htmlVehicleInfo +=
                             "        <tr>\n" +
@@ -57,6 +60,9 @@ public class TelematicService {
             }
 
             averages.setOdmeter(averages.getOdmeter() / dividend);
+            averages.setConsumption(averages.getConsumption() / dividend);
+            averages.setOdomReader(averages.getOdomReader() / dividend);
+            averages.setLiters(averages.getLiters() / dividend);
 
             // int avg[] = { vehilc.getOdom, ,3,4,5}
 
@@ -72,7 +78,7 @@ public class TelematicService {
                     "            <th>Odometer (miles) |</th><th>Consumption (gallons) |</th><th>Last Oil Change |</th><th>Engine Size (liters)</th>\n" +
                     "        </tr>\n" +
                     "        <tr>\n" +
-                    "            <td align=\"center\">" + averages.getOdmeter() + "</td><td align=\"center\">#</td><td align=\"center\">#</td align=\"center\"><td align=\"center\">#</td>\n" +
+                    "            <td align=\"center\">" + averages.getOdmeter() + "</td><td align=\"center\">" + averages.getConsumption()+ "</td><td align=\"center\">"+ averages.getOdomReader() + "</td align=\"center\"><td align=\"center\">"+ averages.getLiters() +"</td>\n" +
                     "        </tr>\n" +
                     "    </table>\n" +
                     "    <h1 align=\"center\">History</h1>\n" +
