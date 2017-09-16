@@ -27,5 +27,6 @@ public class Main {
         System.out.println(vehicleInfo.getConsumption());
 
         telematicService.report(vehicleInfo);
+
     }
 }

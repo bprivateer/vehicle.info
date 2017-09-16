@@ -64,6 +64,7 @@ public class TelematicService {
             averages.setOdomReader(averages.getOdomReader() / dividend);
             averages.setLiters(averages.getLiters() / dividend);
 
+
             // int avg[] = { vehilc.getOdom, ,3,4,5}
 
             File htmlFile = new File("dashboard.html");
@@ -78,7 +79,7 @@ public class TelematicService {
                     "            <th>Odometer (miles) |</th><th>Consumption (gallons) |</th><th>Last Oil Change |</th><th>Engine Size (liters)</th>\n" +
                     "        </tr>\n" +
                     "        <tr>\n" +
-                    "            <td align=\"center\">" + averages.getOdmeter() + "</td><td align=\"center\">" + averages.getConsumption()+ "</td><td align=\"center\">"+ averages.getOdomReader() + "</td align=\"center\"><td align=\"center\">"+ averages.getLiters() +"</td>\n" +
+                    "            <td align=\"center\">" + Math.round(averages.getOdmeter()) + "</td><td align=\"center\">" + Math.round(averages.getConsumption())+ "</td><td align=\"center\">"+ Math.round(averages.getOdomReader()) + "</td align=\"center\"><td align=\"center\">"+ Math.round(averages.getLiters()) +"</td>\n" +
                     "        </tr>\n" +
                     "    </table>\n" +
                     "    <h1 align=\"center\">History</h1>\n" +
