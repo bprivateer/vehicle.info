@@ -1,4 +1,3 @@
-
 public class VehicleInfo {
     int VIN;
     double odmeter;

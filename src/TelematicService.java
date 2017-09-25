@@ -2,6 +2,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.Scanner;
 //
 public class TelematicService {
@@ -51,8 +52,8 @@ public class TelematicService {
 
                     htmlVehicleInfo +=
                             "        <tr>\n" +
-                            "            <td align=\"center\">" +  vehicleInfo.getVIN() + "</td><td align=\"center\">"+ vehicleInfo.getConsumption() + "</td><td align=\"center\">"+ vehicleInfo.getOdomReader() + "</td><td align=\"center\">"+ vehicleInfo.getOdmeter() + "</td align=\"center\"><td align=\"center\">"+ vehicleInfo.getLiters() + "</td>\n" +
-                            "        </tr>\n";
+                                    "            <td align=\"center\">" +  vehicleInfo.getVIN() + "</td><td align=\"center\">"+ vehicleInfo.getConsumption() + "</td><td align=\"center\">"+ vehicleInfo.getOdomReader() + "</td><td align=\"center\">"+ vehicleInfo.getOdmeter() + "</td align=\"center\"><td align=\"center\">"+ vehicleInfo.getLiters() + "</td>\n" +
+                                    "        </tr>\n";
 
                     // Now you have a File object named "f".
                     // You can use this to create a new instance of Scanner
@@ -68,7 +69,7 @@ public class TelematicService {
             // int avg[] = { vehilc.getOdom, ,3,4,5}
 
             File htmlFile = new File("dashboard.html");
-
+            DecimalFormat df = new DecimalFormat("#0.0");
             FileWriter fileWriter = new FileWriter(htmlFile);
             String htmlContent = "<html>\n" +
                     "  <title>Vehicle Telematics Dashboard</title>\n" +
@@ -79,7 +80,7 @@ public class TelematicService {
                     "            <th>Odometer (miles) |</th><th>Consumption (gallons) |</th><th>Last Oil Change |</th><th>Engine Size (liters)</th>\n" +
                     "        </tr>\n" +
                     "        <tr>\n" +
-                    "            <td align=\"center\">" + Math.round(averages.getOdmeter()) + "</td><td align=\"center\">" + Math.round(averages.getConsumption())+ "</td><td align=\"center\">"+ Math.round(averages.getOdomReader()) + "</td align=\"center\"><td align=\"center\">"+ Math.round(averages.getLiters()) +"</td>\n" +
+                    "            <td align=\"center\">" + df.format(averages.getOdmeter()) + "</td><td align=\"center\">" + df.format(averages.getConsumption())+ "</td><td align=\"center\">"+ df.format(averages.getOdomReader()) + "</td align=\"center\"><td align=\"center\">"+ df.format(averages.getLiters()) +"</td>\n" +
                     "        </tr>\n" +
                     "    </table>\n" +
                     "    <h1 align=\"center\">History</h1>\n" +
@@ -106,8 +107,3 @@ public class TelematicService {
     }
 
 }
-
-
-
-
-

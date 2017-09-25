@@ -11,19 +11,19 @@ public class Main {
         System.out.println(vehicleInfo.getVIN());
 
         System.out.println("Write Odometer Number");
-        vehicleInfo.setOdmeter(Integer.parseInt(scanner.nextLine()));
+        vehicleInfo.setOdmeter(Double.parseDouble(scanner.nextLine()));
         System.out.println(vehicleInfo.getOdmeter());
 
         System.out.println("Write Odometer Reader Number");
-        vehicleInfo.setOdomReader(Integer.parseInt(scanner.nextLine()));
+        vehicleInfo.setOdomReader(Double.parseDouble(scanner.nextLine()));
         System.out.println(vehicleInfo.getOdomReader());
 
         System.out.println("Write Liters Number");
-        vehicleInfo.setLiters(Integer.parseInt(scanner.nextLine()));
+        vehicleInfo.setLiters(Double.parseDouble(scanner.nextLine()));
         System.out.println(vehicleInfo.getLiters());
 
         System.out.println("Write Consumption Number");
-        vehicleInfo.setConsumption(Integer.parseInt(scanner.nextLine()));
+        vehicleInfo.setConsumption(Double.parseDouble(scanner.nextLine()));
         System.out.println(vehicleInfo.getConsumption());
 
         telematicService.report(vehicleInfo);
